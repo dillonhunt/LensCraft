@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - LensCraft</title>
+    <style>
+        :root {
+            --primary: #007AFF;
+            --primary-hover: #0056CC;
+            --background: #ffffff;
+            --surface: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --border: #d2d2d7;
+            --success: #34C759;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #000000;
+                --surface: #1c1c1e;
+                --text-primary: #f5f5f7;
+                --text-secondary: #98989d;
+                --border: #38383a;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+            border-radius: 22px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            box-shadow: 0 8px 32px rgba(0, 122, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 24px;
+        }
+
+        .app-store-badge {
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        .app-store-badge img {
+            height: 44px;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .quick-link {
+            background-color: var(--surface);
+            border-radius: 16px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border);
+        }
+
+        .quick-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .quick-link .icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .quick-link h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .quick-link p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* FAQ Section */
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
+        }
+
+        .faq-section {
+            margin-bottom: 48px;
+        }
+
+        .faq-category {
+            margin-bottom: 32px;
+        }
+
+        .faq-category h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-item {
+            background-color: var(--surface);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 18px 20px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .faq-question:hover {
+            background-color: var(--border);
+        }
+
+        .faq-question .chevron {
+            transition: transform 0.2s;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.open .faq-question .chevron {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 20px 18px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            border: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 12px;
+        }
+
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+
+        .contact-button:hover {
+            background-color: var(--primary-hover);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        footer nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 14px;
+        }
+
+        footer nav a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="app-icon">🔍</div>
+            <h1>LensCraft</h1>
+            <p class="tagline">Magnifier & Flashlight</p>
+            <a href="https://apps.apple.com/app/lenscraft" class="app-store-badge">
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+            </a>
+        </header>
+
+        <div class="quick-links">
+            <a href="privacy-policy.html" class="quick-link">
+                <div class="icon">🔒</div>
+                <h3>Privacy Policy</h3>
+                <p>How we protect your data</p>
+            </a>
+            <a href="terms-of-service.html" class="quick-link">
+                <div class="icon">📄</div>
+                <h3>Terms of Service</h3>
+                <p>Usage guidelines</p>
+            </a>
+            <a href="mailto:support@emberlabs.app" class="quick-link">
+                <div class="icon">✉               <h3>Contact Us</h3>
+                <p>Get help via email</p>
+            </a>
+        </div>
+
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-category">
+                <h3><span>✨</span> Getting Started</h3>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I use the magnifier?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Open the Magnifier tab and point your camera at what you want to magnify. Use the zoom slider at the bottom to adjust magnification from 1x to 10x. You can also tap the camera button to freeze the image and examine details without holding the phone steady.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I use the flashlight?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Switch to the Flashlight tab and tap the power button to turn the light on or off. Use the brightness slider to adjust the intensity from low to high.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Can I use the flashlight while magnifying?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! Enable "Light on with Magnifier" in Settings to automatically turn on the flashlight when using the magnifier. This helps illuminate what you're viewing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h3><span>⭐</span> Features</h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What are color filters for?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Color filters can make text easier to read for people with visual impairments or color blindness. Try different filters like High Contrast, Inverted, or color tints to find what works best for you. Some filters are included free, while others require LensCraft Pro.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I save a magnified photo?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            First freeze the image by tapping the camera button, then tap the save button (download icon) to save the magnified view to your photo library. This feature requires LensCraft Pro, which is available as a one-time purchase.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What's included in LensCraft Pro?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            LensCraft Pro unlocks: (1) Save magnified photos to your library, (2) All 7 color filters for easier reading. It's a one-time purchase with no subscriptions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h3><span>🔧</span> Troubleshooting</h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        The camera isn't working
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Make sure you've granted camera permission. Go to Settings > LensCraft > Camera and ensure it's enabled. If the issue persists, try closing and reopening the app, or restart your device.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        The flashlight won't turn on
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            The flashlight may not work if the camera is actively recording video in another app, or if the device is too hot. Close other camera apps and let your device cool down if needed.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        I can't save photos
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            To save photos, you need: (1) LensCraft Pro, and (2) Photo Library permission. Go to Settings > LensCraft > Photos and select "Add Photos Only" or "Full Access".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        My purchase isn't showing up
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Tap "Restore Purchase" in the app's Settings under LensCraft Pro. Make sure you're signed into the same Apple ID you used for the original purchase. If you continue to have issues, contact us at support@emberlabs.app.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h3><span>♿</span> Accessibility</h3>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Does LensCraft work with VoiceOver?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, LensCraft is fully compatible with VoiceOver. All controls are labeled and can be navigated using standard VoiceOver gestures.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Can I use larger text?
+                        <span class="chevron">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            LensCraft respects your system Dynamic Type settings. Increase text size in Settings > Accessibility > Display & Text Size to make text larger throughout the app.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <h2>Still Need Help?</h2>
+            <p>We're here to help! Contact us and we'll get back to you as soon as possible.</p>
+            <a href="mailto:support@emberlabs.app?subject=LensCraft%20Support" class="contact-button">
+                <span>✉️</span> Email Support
+            </a>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Ember Labs. All rights reserved.</p>
+            <nav>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="mailto:support@emberlabs.app">Contact</a>
+            </nav>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isOpen = faqItem.classList.contains('open');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('open');
+                });
+                
+                // Toggle current item
+                if (!isOpen) {
+                    faqItem.classList.add('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
